@@ -1,3 +1,6 @@
+##For use in Windows PowerShell to remove all residual registry keys that contain Autodesk
+##Use at your own Risk!
+
 $autodeskRegistryPaths = @(
     "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
     "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
