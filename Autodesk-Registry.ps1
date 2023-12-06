@@ -1,9 +1,15 @@
-$softwareNames = @("Autodesk Revit", "Navisworks", "AutoCAD")
+$autodeskRegistryPaths = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+    "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+)
 
-foreach ($name in $softwareNames) {
-    $path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-    $path | Get-ChildItem | Get-ItemProperty | Where-Object { $_.DisplayName -like "*$name*" } | ForEach-Object {
-        Write-Host "Found residual entry for $($_.DisplayName). Deleting..."
+foreach ($path in $autodeskRegistryPaths) {
+    Get-ChildItem -Path $path | 
+    Get-ItemProperty | 
+    Where-Object { $_.DisplayName -like "*Autodesk*" } | 
+    ForEach-Object {
+        $displayName = $_.DisplayName
+        Write-Host "Found residual Autodesk entry: $displayName. Deleting..."
         Remove-Item $_.PSPath -Recurse -Force
     }
 }
