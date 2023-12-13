@@ -22,3 +22,8 @@ Get-WmiObject -Class Win32_Processor | Format-Table -Property Caption -AutoSize
 
   # Get GPU information
 Get-WmiObject -Class Win32_VideoController | Format-Table -Property Caption -AutoSize
+
+## Useful tool to manage software on Windows
+  https://github.com/ChrisTitusTech/winutil
+
+  iwr -useb https://christitus.com/win | iex
